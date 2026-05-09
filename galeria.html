@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Galería — Diver Eventos · La Plata</title>
+<meta name="description" content="Galería de fotos y videos del salón Diver Eventos en La Plata."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:     #12100e;
+  --warm:    #f5f0ea;
+  --cream:   #faf7f3;
+  --accent:  #1c5fa8;
+  --accent2: #2d7dd2;
+  --sky:     #deeaf7;
+  --skydeep: #b8d3ef;
+  --mid:     #6b7f95;
+  --border:  #dcd4c8;
+  --white:   #ffffff;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--skydeep);border-radius:2px}
+
+/* ════ NAV ════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3.5rem;height:64px;
+  background:rgba(250,247,243,0.93);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:height .3s,box-shadow .3s;
+}
+nav.scrolled{height:54px;box-shadow:0 4px 24px rgba(18,16,14,.07)}
+.nav-logo{display:flex;align-items:center}
+.nav-logo img{height:40px;width:auto;display:block;transition:opacity .2s}
+.nav-logo img:hover{opacity:.85}
+.nav-logo-txt{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:700;
+  color:var(--ink);letter-spacing:.01em;
+}
+.nav-logo-txt em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;align-items:center;list-style:none;gap:.2rem}
+.nav-links a{
+  font-size:.72rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mid);padding:.4rem .85rem;
+  border-radius:3px;transition:color .2s,background .2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);background:var(--sky)}
+.nav-btn{
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--white)!important;background:var(--accent)!important;
+  padding:.5rem 1.3rem!important;border-radius:3px;
+  margin-left:.6rem;transition:background .2s!important;
+}
+.nav-btn:hover{background:var(--accent2)!important}
+
+/* ════ HERO GALERÍA ════ */
+.hero-gal{
+  padding-top:64px;
+  background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding-bottom:5rem;
+  padding-left:2rem;padding-right:2rem;
+  padding-top:calc(64px + 5rem);
+  position:relative;overflow:hidden;
+}
+.hero-gal::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(28,95,168,.25) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 80% 30%, rgba(45,125,210,.15) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-gal-tag{
+  font-size:.68rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--skydeep);display:flex;align-items:center;gap:.8rem;
+  margin-bottom:1.5rem;
+  opacity:0;animation:up .7s .1s ease forwards;
+}
+.hero-gal-tag::before{content:'';display:block;width:28px;height:1px;background:var(--skydeep)}
+.hero-gal-tag::after{content:'';display:block;width:28px;height:1px;background:var(--skydeep)}
+.hero-gal h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.5rem,6vw,5rem);
+  font-weight:400;line-height:1.08;
+  color:var(--white);letter-spacing:-.02em;
+  opacity:0;animation:up .8s .2s ease forwards;
+}
+.hero-gal h1 em{font-style:italic;color:var(--skydeep)}
+.hero-gal p{
+  font-size:.97rem;font-weight:300;color:rgba(200,220,240,.65);
+  line-height:1.85;max-width:480px;margin-top:1.2rem;
+  opacity:0;animation:up .8s .35s ease forwards;
+}
+.back-link{
+  position:absolute;top:calc(64px + 1.5rem);left:3.5rem;
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);transition:color .2s;
+  opacity:0;animation:up .7s .4s ease forwards;
+}
+.back-link:hover{color:var(--white)}
+.back-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+
+/* ════ FILTROS ════ */
+.filtros{
+  display:flex;align-items:center;justify-content:center;
+  gap:.4rem;flex-wrap:wrap;
+  padding:2.5rem 2rem;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:64px;z-index:100;
+}
+.filtro-btn{
+  font-family:'DM Sans',sans-serif;
+  font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mid);background:transparent;
+  padding:.45rem 1.1rem;border-radius:3px;
+  border:1px solid var(--border);cursor:pointer;
+  transition:all .2s;
+}
+.filtro-btn:hover{color:var(--ink);border-color:var(--skydeep);background:var(--sky)}
+.filtro-btn.activo{color:var(--white);background:var(--accent);border-color:var(--accent)}
+
+/* ════ GRID ════ */
+.galeria-wrap{
+  max-width:1300px;margin:0 auto;
+  padding:4rem 3rem 6rem;
+}
+
+/* Layout mosaico con columnas CSS */
+.grid-masonry{
+  columns:3;column-gap:8px;
+}
+.grid-item{
+  break-inside:avoid;
+  margin-bottom:8px;
+  position:relative;overflow:hidden;
+  border-radius:2px;cursor:pointer;
+  background:var(--sky);
+  transition:opacity .3s,transform .3s;
+}
+.grid-item.oculto{
+  display:none;
+}
+.grid-item img{
+  width:100%;display:block;
+  transition:transform .55s ease;
+}
+.grid-item:hover img{transform:scale(1.04)}
+
+/* Videos */
+.grid-item.video-item{position:relative}
+.grid-item video{
+  width:100%;display:block;
+  background:#000;
+}
+.video-play{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:56px;height:56px;
+  background:rgba(255,255,255,.9);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+  transition:opacity .2s,transform .2s;
+}
+.video-play svg{width:20px;height:20px;fill:var(--accent);margin-left:3px}
+.grid-item.video-item:hover .video-play{opacity:0;transform:translate(-50%,-50%) scale(.8)}
+
+/* Overlay hover en fotos */
+.item-overlay{
+  position:absolute;inset:0;
+  background:rgba(18,16,14,.45);
+  opacity:0;transition:opacity .3s;
+  display:flex;align-items:flex-end;
+  padding:1.2rem;
+}
+.grid-item:hover .item-overlay{opacity:1}
+.item-caption{
+  font-size:.78rem;font-weight:300;
+  color:rgba(255,255,255,.9);letter-spacing:.05em;
+  line-height:1.4;
+}
+
+/* Placeholder (cuando no hay imagen real) */
+.item-ph{
+  width:100%;
+  background:linear-gradient(160deg,var(--sky),var(--skydeep));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.6rem;color:var(--accent);
+  font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;opacity:.65;
+  padding:3rem 1rem;
+}
+.item-ph svg{opacity:.3;width:36px;height:36px}
+
+/* Tag tipo de item */
+.item-tag{
+  position:absolute;top:.8rem;left:.8rem;
+  font-size:.6rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--accent);color:var(--white);
+  padding:.25rem .65rem;border-radius:2px;
+  pointer-events:none;
+}
+
+/* ════ LIGHTBOX ════ */
+.lightbox{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(18,16,14,.96);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.lightbox.open{opacity:1;pointer-events:all}
+.lb-inner{
+  position:relative;max-width:1100px;width:100%;
+  display:flex;align-items:center;justify-content:center;
+}
+.lb-img{
+  max-width:100%;max-height:85vh;
+  object-fit:contain;border-radius:2px;
+  display:block;
+}
+.lb-video{
+  width:100%;max-height:85vh;border-radius:2px;
+  background:#000;
+}
+.lb-close{
+  position:fixed;top:1.5rem;right:2rem;
+  width:40px;height:40px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  border-radius:2px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.7);font-size:1.3rem;line-height:1;
+  transition:background .2s,color .2s;
+}
+.lb-close:hover{background:rgba(255,255,255,.2);color:var(--white)}
+.lb-nav{
+  position:fixed;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  border-radius:2px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.lb-nav:hover{background:rgba(255,255,255,.16)}
+.lb-nav svg{width:18px;height:18px;stroke:rgba(255,255,255,.7);fill:none;stroke-width:2;stroke-linecap:round}
+.lb-prev{left:1.5rem}
+.lb-next{right:1.5rem}
+.lb-caption{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-size:.78rem;font-weight:300;
+  color:rgba(255,255,255,.45);letter-spacing:.08em;
+  text-align:center;white-space:nowrap;
+}
+
+/* ════ CTA FINAL ════ */
+.cta-final{
+  background:var(--accent);
+  text-align:center;
+  padding:5rem 2rem;
+}
+.cta-final h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3.5vw,3rem);font-weight:400;
+  color:var(--white);line-height:1.15;margin-bottom:1rem;
+}
+.cta-final h2 em{font-style:italic;color:var(--sky)}
+.cta-final p{
+  font-size:.95rem;font-weight:300;
+  color:rgba(255,255,255,.65);margin-bottom:2.5rem;line-height:1.8;
+}
+.btn-white{
+  font-family:'DM Sans',sans-serif;
+  font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--white);color:var(--accent);
+  padding:.85rem 2.2rem;border-radius:3px;border:none;cursor:pointer;
+  transition:background .25s,transform .2s;display:inline-block;
+}
+.btn-white:hover{background:var(--sky);transform:translateY(-1px)}
+
+/* ════ FOOTER ════ */
+footer{
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:2.5rem 5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;
+}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white)}
+.footer-logo em{font-style:normal;color:var(--skydeep)}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.25);letter-spacing:.05em}
+.footer-socials{display:flex;gap:.5rem}
+.f-soc{
+  width:34px;height:34px;border-radius:2px;
+  border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.4);transition:border-color .2s,color .2s;
+}
+.f-soc:hover{border-color:var(--accent2);color:var(--white)}
+.f-soc svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ════ REVEAL ════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* ════ RESPONSIVE ════ */
+@media(max-width:900px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .back-link{left:1.5rem}
+  .grid-masonry{columns:2}
+  .galeria-wrap{padding:3rem 1.5rem 5rem}
+  footer{padding:2rem;flex-direction:column;align-items:flex-start;gap:1.2rem}
+}
+@media(max-width:540px){
+  .grid-masonry{columns:1}
+  .filtros{padding:1.5rem 1rem;top:54px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <!-- LOGO: reemplazá src con tu archivo -->
+    <img src="logo.png" alt="Logo Diver Eventos"/>
+    <!-- fallback texto: <span class="nav-logo-txt">Diver <em>Eventos</em></span> -->
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#nosotros">Nosotros</a></li>
+    <li><a href="index.html#eventos">Eventos</a></li>
+    <li><a href="galeria.html" class="active">Galería</a></li>
+    <li><a href="index.html#contacto">Contacto</a></li>
+    <li><a href="https://wa.me/5402214637217" target="_blank" class="nav-btn">Reservar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero-gal">
+  <a href="index.html" class="back-link">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Volver al inicio
+  </a>
+  <div class="hero-gal-tag">Diver Eventos · La Plata</div>
+  <h1>Nuestra <em>galería</em></h1>
+  <p>Fotos y videos de los eventos que pasaron por nuestro salón. Cada imagen, una fiesta que no se olvidó.</p>
+</div>
+
+<!-- FILTROS -->
+<div class="filtros" id="filtros">
+  <button class="filtro-btn activo" data-filtro="todo">Todo</button>
+  <button class="filtro-btn" data-filtro="foto">Fotos</button>
+  <button class="filtro-btn" data-filtro="video">Videos</button>
+
+<!-- GRID -->
+<div class="galeria-wrap">
+  <div class="grid-masonry" id="grid">
+
+    <!--
+    ══════════════════════════════════════════
+    CÓMO AGREGAR CONTENIDO:
+
+    — FOTO:
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="TU_FOTO.jpg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+
+    — VIDEO (archivo local .mp4):
+    <div class="grid-item video-item" data-tipo="video quince">
+      <video src="TU_VIDEO.mp4" preload="metadata" muted playsinline></video>
+      <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+      <div class="item-overlay"><span class="item-caption">Quinceañera de Sofía</span></div>
+    </div>
+
+    — VIDEO YOUTUBE/VIMEO (embed):
+    <div class="grid-item video-item" data-tipo="video casamiento">
+      <div class="yt-wrap" data-src="https://www.youtube.com/embed/ID_DEL_VIDEO">
+        <img src="https://img.youtube.com/vi/ID_DEL_VIDEO/hqdefault.jpg" alt="Preview"/>
+        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+      </div>
+      <div class="item-overlay"><span class="item-caption">Casamiento de Laura y Martín</span></div>
+    </div>
+
+    data-tipo puede combinar valores: "foto cumple", "video quince", "foto salon", etc.
+    Usá los filtros disponibles: foto · video · cumple · quince · casamiento · infantil · salon
+    ══════════════════════════════════════════
+    -->
+
+    <!-- ── EJEMPLOS PLACEHOLDER (borrá estos cuando tengas contenido real) ── -->
+
+    <div class="grid-item" data-tipo="foto salon">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon1.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+      <span class="item-tag">Salón</span>
+    </div>
+
+    <div class="grid-item video-item" data-tipo="video cumple">
+    <div class="grid-item video-item" data-tipo="video quince">
+      <video src="Videosalon1.mp4" preload="metadata" muted playsinline></video>
+      <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+      <div class="item-overlay"><span class="item-caption">Quinceañera de Sofía</span></div>
+    </div>
+      <span class="item-tag">Video</span>
+    </div>
+
+        <div class="grid-item video-item" data-tipo="video quince">
+    <div class="grid-item video-item" data-tipo="video quince">
+      <video src="Videoentrada2.mp4" preload="metadata" muted playsinline></video>
+      <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+      <div class="item-overlay"><span class="item-caption">Quinceañera de Sofía</span></div>
+    </div>
+      <span class="item-tag">Video</span>
+    </div>
+
+    <div class="grid-item" data-tipo="foto quince">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon2.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+      <span class="item-tag">Salón</span>
+    </div>
+
+    <div class="grid-item" data-tipo="foto cumple">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon3.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+      <span class="item-tag">Salón</span>
+    </div>
+
+    <div class="grid-item" data-tipo="foto casamiento">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon4.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>>
+      <span class="item-tag">Salón</span>
+    </div>
+
+    <div class="grid-item video-item" data-tipo="video quince">
+    <div class="grid-item video-item" data-tipo="video quince">
+      <video src="Videosalon2.mp4" preload="metadata" muted playsinline></video>
+      <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+      <div class="item-overlay"><span class="item-caption">Quinceañera de Sofía</span></div>
+    </div>
+      <span class="item-tag">Video</span>
+    </div>
+
+    <div class="grid-item" data-tipo="foto infantil">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon5.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+      <span class="item-tag">Salón</span>
+    </div>
+
+    <div class="grid-item" data-tipo="foto salon">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon6.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+      <span class="item-tag">Salón</span>
+    </div>
+
+    <div class="grid-item" data-tipo="foto cumple">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon7.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+      <span class="item-tag">Cumpleaños</span>
+    </div>
+    
+        <div class="grid-item" data-tipo="foto cumple">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon8.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+      <span class="item-tag">Cumpleaños</span>
+    </div>
+
+    <div class="grid-item video-item" data-tipo="video quince">
+    <div class="grid-item video-item" data-tipo="video quince">
+      <video src="Videoentrada1.mp4" preload="metadata" muted playsinline></video>
+      <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+      <div class="item-overlay"><span class="item-caption">Quinceañera de Sofía</span></div>
+    </div>
+      <span class="item-tag">Video</span>
+    </div>
+
+    <div class="grid-item" data-tipo="foto cumple">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon9.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+      <span class="item-tag">Cumpleaños</span>
+    </div>
+    
+        <div class="grid-item" data-tipo="foto cumple">
+    <div class="grid-item" data-tipo="foto cumple">
+      <img src="Salon10.jpeg" alt="Descripción"/>
+      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
+    </div>
+      <span class="item-tag">Cumpleaños</span>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-final">
+  <h2>¿Te gustó lo que<br/><em>viste?</em></h2>
+  <p>Reservá tu fecha y hacé que tu evento sea el próximo en estas páginas.</p>
+  <a href="https://wa.me/5402214637217?text=Hola%2C%20vi%20la%20galer%C3%ADa%20y%20me%20gustar%C3%ADa%20consultar" target="_blank" class="btn-white">Consultá por WhatsApp</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <!-- LOGO PIE: reemplazá src con tu archivo -->
+  <a href="index.html" class="footer-logo-wrap">
+    <img src="logo.png" alt="Logo Diver Eventos" style="height:36px;width:auto;display:block;opacity:.85;filter:brightness(10)"/>
+    <!-- fallback: <div class="footer-logo">Diver <em>Eventos</em></div> -->
+  </a>
+  <p class="footer-copy">© 2025 Diver Eventos — La Plata, Buenos Aires</p>
+  <div class="footer-socials">
+    <a href="https://www.facebook.com/profile.php?id=61581986461908" target="_blank" class="f-soc" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+    </a>
+    <a href="tel:02214637217" class="f-soc" aria-label="Teléfono">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 3.18 2 2 0 012 1h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+    </a>
+    <a href="mailto:dragracielanoemiaguirre@gmail.com" class="f-soc" aria-label="Email">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-inner" id="lb-inner"></div>
+  <button class="lb-close" id="lb-close">&#x2715;</button>
+  <button class="lb-nav lb-prev" id="lb-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="lb-nav lb-next" id="lb-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
+
+<script>
+/* ── NAV scroll ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+
+/* ── FILTROS ── */
+const btns = document.querySelectorAll('.filtro-btn');
+const items = document.querySelectorAll('.grid-item');
+
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    btns.forEach(b => b.classList.remove('activo'));
+    btn.classList.add('activo');
+    const filtro = btn.dataset.filtro;
+    items.forEach(item => {
+      const tipos = item.dataset.tipo || '';
+      if (filtro === 'todo' || tipos.includes(filtro)) {
+        item.classList.remove('oculto');
+      } else {
+        item.classList.add('oculto');
+      }
+    });
+  });
+});
+
+/* ── LIGHTBOX ── */
+const lightbox  = document.getElementById('lightbox');
+const lbInner   = document.getElementById('lb-inner');
+const lbCaption = document.getElementById('lb-caption');
+const lbClose   = document.getElementById('lb-close');
+const lbPrev    = document.getElementById('lb-prev');
+const lbNext    = document.getElementById('lb-next');
+
+// Recolectar items abribles (con imagen real o video real, no placeholders)
+let openable = [];
+let currentIdx = 0;
+
+function buildOpenable() {
+  openable = [];
+  document.querySelectorAll('.grid-item:not(.oculto)').forEach(item => {
+    const img = item.querySelector('img:not(.item-ph)');
+    const vid = item.querySelector('video');
+    const ytWrap = item.querySelector('.yt-wrap');
+    const caption = item.querySelector('.item-caption')?.textContent || '';
+    if (img && !item.querySelector('.item-ph')) {
+      openable.push({ type: 'img', src: img.src, caption });
+    } else if (vid) {
+      openable.push({ type: 'video', src: vid.src, caption });
+    } else if (ytWrap) {
+      openable.push({ type: 'yt', src: ytWrap.dataset.src, caption });
+    }
+  });
+}
+
+function openLB(idx) {
+  buildOpenable();
+  if (!openable.length) return;
+  currentIdx = (idx + openable.length) % openable.length;
+  renderLB();
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderLB() {
+  const item = openable[currentIdx];
+  lbInner.innerHTML = '';
+  if (item.type === 'img') {
+    const img = document.createElement('img');
+    img.src = item.src; img.className = 'lb-img'; img.alt = item.caption;
+    lbInner.appendChild(img);
+  } else if (item.type === 'video') {
+    const vid = document.createElement('video');
+    vid.src = item.src; vid.className = 'lb-video';
+    vid.controls = true; vid.autoplay = true;
+    lbInner.appendChild(vid);
+  } else if (item.type === 'yt') {
+    const iframe = document.createElement('iframe');
+    iframe.src = item.src + '?autoplay=1';
+    iframe.className = 'lb-video'; iframe.allowFullscreen = true;
+    iframe.style.cssText = 'border:none;aspect-ratio:16/9;width:100%';
+    lbInner.appendChild(iframe);
+  }
+  lbCaption.textContent = item.caption || '';
+  lbPrev.style.display = openable.length > 1 ? 'flex' : 'none';
+  lbNext.style.display = openable.length > 1 ? 'flex' : 'none';
+}
+
+function closeLB() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  lbInner.innerHTML = '';
+}
+
+lbClose.addEventListener('click', closeLB);
+lbPrev.addEventListener('click', () => { currentIdx = (currentIdx - 1 + openable.length) % openable.length; renderLB(); });
+lbNext.addEventListener('click', () => { currentIdx = (currentIdx + 1) % openable.length; renderLB(); });
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLB(); });
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLB();
+  if (e.key === 'ArrowLeft') { currentIdx = (currentIdx - 1 + openable.length) % openable.length; renderLB(); }
+  if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % openable.length; renderLB(); }
+});
+
+// Asignar click a cada item
+items.forEach((item, i) => {
+  item.addEventListener('click', () => {
+    buildOpenable();
+    // Encontrar el índice dentro de openable que corresponde a este item
+    const img = item.querySelector('img:not(.item-ph)');
+    const vid = item.querySelector('video');
+    const ytWrap = item.querySelector('.yt-wrap');
+    const caption = item.querySelector('.item-caption')?.textContent || '';
+    let src = img?.src || vid?.src || ytWrap?.dataset.src;
+    if (!src) return; // placeholder, no abrir
+    const idx = openable.findIndex(o => o.src === src);
+    openLB(idx >= 0 ? idx : 0);
+  });
+});
+
+/* ── Videos YouTube: click en thumbnail carga iframe ── */
+document.querySelectorAll('.yt-wrap').forEach(wrap => {
+  wrap.addEventListener('click', e => {
+    e.stopPropagation();
+    const iframe = document.createElement('iframe');
+    iframe.src = wrap.dataset.src + '?autoplay=1';
+    iframe.style.cssText = 'width:100%;aspect-ratio:16/9;border:none;display:block';
+    iframe.allowFullscreen = true;
+    wrap.replaceWith(iframe);
+  });
+});
+
+/* ── Reveal ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

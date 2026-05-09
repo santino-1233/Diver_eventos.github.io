@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cotizá tu evento — Diver Eventos · La Plata</title>
+<meta name="description" content="Completá el formulario y recibí una cotización personalizada para tu evento en Diver Eventos, La Plata."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:     #12100e;
+  --warm:    #f5f0ea;
+  --cream:   #faf7f3;
+  --accent:  #1c5fa8;
+  --accent2: #2d7dd2;
+  --sky:     #deeaf7;
+  --skydeep: #b8d3ef;
+  --mid:     #6b7f95;
+  --border:  #dcd4c8;
+  --white:   #ffffff;
+  --error:   #c0392b;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+  min-height:100vh;
+}
+a{text-decoration:none;color:inherit}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--skydeep);border-radius:2px}
+
+/* ════ NAV ════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3.5rem;height:64px;
+  background:rgba(250,247,243,0.93);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:height .3s,box-shadow .3s;
+}
+nav.scrolled{height:54px;box-shadow:0 4px 24px rgba(18,16,14,.07)}
+.nav-logo{display:flex;align-items:center}
+.nav-logo img{height:40px;width:auto;display:block;transition:opacity .2s}
+.nav-logo img:hover{opacity:.85}
+.nav-logo-txt{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:700;
+  color:var(--ink);letter-spacing:.01em;
+}
+.nav-logo-txt em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;align-items:center;list-style:none;gap:.2rem}
+.nav-links a{
+  font-size:.72rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mid);padding:.4rem .85rem;
+  border-radius:3px;transition:color .2s,background .2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);background:var(--sky)}
+.nav-btn{
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--white)!important;background:var(--accent)!important;
+  padding:.5rem 1.3rem!important;border-radius:3px;
+  margin-left:.6rem;transition:background .2s!important;
+}
+.nav-btn:hover{background:var(--accent2)!important}
+
+/* ════ HERO ════ */
+.hero-cot{
+  background:var(--ink);
+  padding:calc(64px + 5rem) 2rem 5rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero-cot::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 60% at 15% 50%, rgba(28,95,168,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 85% 30%, rgba(45,125,210,.18) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-cot-tag{
+  font-size:.68rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--skydeep);
+  display:flex;align-items:center;justify-content:center;gap:.8rem;
+  margin-bottom:1.5rem;
+  opacity:0;animation:up .7s .1s ease forwards;
+}
+.hero-cot-tag::before{content:'';display:block;width:28px;height:1px;background:var(--skydeep)}
+.hero-cot-tag::after{content:'';display:block;width:28px;height:1px;background:var(--skydeep)}
+.hero-cot h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.5rem,6vw,5rem);
+  font-weight:400;line-height:1.08;
+  color:var(--white);letter-spacing:-.02em;
+  opacity:0;animation:up .8s .2s ease forwards;
+}
+.hero-cot h1 em{font-style:italic;color:var(--skydeep)}
+.hero-cot p{
+  font-size:.97rem;font-weight:300;
+  color:rgba(200,220,240,.65);
+  line-height:1.85;max-width:480px;
+  margin:1.2rem auto 0;
+  opacity:0;animation:up .8s .35s ease forwards;
+}
+
+/* ════ CONTENIDO PRINCIPAL ════ */
+.main-wrap{
+  max-width:1100px;margin:0 auto;
+  padding:5rem 2rem 7rem;
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:5rem;
+  align-items:start;
+}
+
+/* ── Panel izquierdo: info ── */
+.info-panel{}
+.info-tag{
+  font-size:.68rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.info-tag::before{content:'';display:block;width:22px;height:1px;background:var(--accent)}
+.info-panel h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:400;line-height:1.15;color:var(--ink);
+  margin-bottom:1.5rem;
+}
+.info-panel h2 em{font-style:italic;color:var(--accent)}
+.info-panel p{
+  font-size:.97rem;font-weight:300;color:var(--mid);
+  line-height:1.9;margin-bottom:1.2rem;
+}
+
+.pasos{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.2rem}
+.paso{
+  display:flex;align-items:flex-start;gap:1.2rem;
+  padding:1.2rem 1.4rem;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:3px;
+  transition:border-color .25s;
+}
+.paso:hover{border-color:var(--skydeep)}
+.paso-num{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-weight:700;
+  color:var(--skydeep);line-height:1;
+  flex-shrink:0;min-width:2rem;
+}
+.paso-txt h4{
+  font-size:.88rem;font-weight:500;color:var(--ink);
+  margin-bottom:.25rem;
+}
+.paso-txt p{font-size:.82rem;font-weight:300;color:var(--mid);line-height:1.65}
+
+.info-contacto{
+  margin-top:2.5rem;
+  padding:1.4rem 1.6rem;
+  background:var(--sky);
+  border-radius:3px;
+  border:1px solid var(--skydeep);
+}
+.info-contacto p{font-size:.85rem;font-weight:300;color:var(--mid);line-height:1.7;margin-bottom:.3rem}
+.info-contacto a{color:var(--accent);font-weight:500}
+
+/* ── Panel derecho: formulario ── */
+.form-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:3px;
+  padding:2.5rem 2.2rem;
+  position:sticky;
+  top:calc(64px + 2rem);
+  box-shadow:0 8px 40px rgba(18,16,14,.07);
+}
+.form-card-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:500;color:var(--ink);
+  margin-bottom:.4rem;line-height:1.2;
+}
+.form-card-sub{
+  font-size:.8rem;font-weight:300;color:var(--mid);
+  margin-bottom:2rem;line-height:1.6;
+  padding-bottom:1.5rem;
+  border-bottom:1px solid var(--border);
+}
+
+/* ── Campos ── */
+.campo{margin-bottom:1.4rem}
+.campo label{
+  display:block;
+  font-size:.68rem;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mid);margin-bottom:.5rem;
+}
+.campo label span{color:var(--accent)}
+
+.campo input,
+.campo select,
+.campo textarea{
+  width:100%;
+  font-family:'DM Sans',sans-serif;
+  font-size:.92rem;font-weight:300;
+  color:var(--ink);
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:3px;
+  padding:.75rem 1rem;
+  outline:none;
+  transition:border-color .2s,background .2s;
+  appearance:none;
+  -webkit-appearance:none;
+}
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus{
+  border-color:var(--accent);
+  background:var(--white);
+}
+.campo input::placeholder,
+.campo textarea::placeholder{color:var(--skydeep);font-weight:300}
+.campo textarea{resize:vertical;min-height:110px;line-height:1.6}
+
+/* Select custom arrow */
+.select-wrap{position:relative}
+.select-wrap::after{
+  content:'';
+  position:absolute;right:1rem;top:50%;transform:translateY(-50%);
+  width:0;height:0;
+  border-left:4px solid transparent;
+  border-right:4px solid transparent;
+  border-top:5px solid var(--mid);
+  pointer-events:none;
+}
+.select-wrap select{padding-right:2.5rem;cursor:pointer}
+
+/* Campo invitados con opción "no sé" */
+.invitados-wrap{display:flex;gap:.7rem;align-items:center}
+.invitados-wrap input{flex:1}
+.no-se-btn{
+  font-family:'DM Sans',sans-serif;
+  font-size:.72rem;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;
+  color:var(--mid);
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:3px;
+  padding:.75rem .9rem;
+  cursor:pointer;
+  transition:all .2s;
+  flex-shrink:0;
+}
+.no-se-btn:hover,.no-se-btn.activo{
+  background:var(--sky);
+  border-color:var(--skydeep);
+  color:var(--accent);
+}
+.no-se-btn.activo{background:var(--skydeep);border-color:var(--accent)}
+
+/* Fecha */
+.campo input[type="date"]{cursor:pointer}
+.campo input[type="date"]::-webkit-calendar-picker-indicator{
+  opacity:.4;cursor:pointer;filter:invert(.4)
+}
+
+/* Servicios checkboxes */
+.checks-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:.5rem;margin-top:.1rem;
+}
+.check-item{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.55rem .7rem;
+  border:1px solid var(--border);border-radius:3px;
+  cursor:pointer;transition:border-color .2s,background .2s;
+  font-size:.82rem;font-weight:300;color:var(--mid);
+}
+.check-item:hover{border-color:var(--skydeep);background:var(--sky);color:var(--ink)}
+.check-item input[type="checkbox"]{
+  width:14px;height:14px;
+  accent-color:var(--accent);
+  cursor:pointer;flex-shrink:0;
+}
+.check-item.marcado{
+  border-color:var(--accent);
+  background:var(--sky);
+  color:var(--ink);
+}
+
+/* Error */
+.campo-error{
+  font-size:.72rem;color:var(--error);
+  margin-top:.35rem;display:none;
+}
+.campo.invalido input,
+.campo.invalido select,
+.campo.invalido textarea{border-color:var(--error)}
+.campo.invalido .campo-error{display:block}
+
+/* Botón enviar */
+.btn-enviar{
+  width:100%;
+  font-family:'DM Sans',sans-serif;
+  font-size:.82rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--white);
+  background:var(--accent);
+  border:none;border-radius:3px;
+  padding:1rem;
+  cursor:pointer;
+  margin-top:1.6rem;
+  transition:background .25s,transform .2s;
+  display:flex;align-items:center;justify-content:center;gap:.7rem;
+}
+.btn-enviar:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-enviar svg{width:18px;height:18px;fill:white;flex-shrink:0}
+.btn-nota{
+  font-size:.72rem;font-weight:300;color:var(--mid);
+  text-align:center;margin-top:.8rem;line-height:1.5;
+}
+
+/* ════ CTA FINAL ════ */
+.cta-strip{
+  background:var(--accent);
+  padding:4rem 2rem;text-align:center;
+}
+.cta-strip h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:400;color:var(--white);line-height:1.2;margin-bottom:.8rem;
+}
+.cta-strip h2 em{font-style:italic;color:var(--sky)}
+.cta-strip p{font-size:.9rem;font-weight:300;color:rgba(255,255,255,.6);margin-bottom:2rem}
+.btn-white{
+  font-family:'DM Sans',sans-serif;
+  font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--white);color:var(--accent);
+  padding:.85rem 2.2rem;border-radius:3px;
+  transition:background .25s,transform .2s;display:inline-block;
+}
+.btn-white:hover{background:var(--sky);transform:translateY(-1px)}
+
+/* ════ FOOTER ════ */
+footer{
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:2.5rem 5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;
+}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white)}
+.footer-logo em{font-style:normal;color:var(--skydeep)}
+.footer-copy{font-size:.72rem;color:rgba(255,255,255,.25);letter-spacing:.05em}
+.footer-socials{display:flex;gap:.5rem}
+.f-soc{
+  width:34px;height:34px;border-radius:2px;
+  border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.4);transition:border-color .2s,color .2s;
+}
+.f-soc:hover{border-color:var(--accent2);color:var(--white)}
+.f-soc svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ════ REVEAL ════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+.reveal-l{opacity:0;transform:translateX(-24px);transition:opacity .6s ease,transform .6s ease}
+.reveal-l.vis{opacity:1;transform:none}
+
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* ════ RESPONSIVE ════ */
+@media(max-width:960px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .main-wrap{grid-template-columns:1fr;gap:3rem;padding:3.5rem 1.5rem 5rem}
+  .form-card{position:static;order:-1}
+  footer{padding:2rem;flex-direction:column;align-items:flex-start;gap:1.2rem}
+}
+@media(max-width:500px){
+  .checks-grid{grid-template-columns:1fr}
+  .invitados-wrap{flex-direction:column;align-items:stretch}
+  .no-se-btn{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <!-- LOGO: reemplazá src con tu archivo -->
+    <img src="logo.png" alt="Logo Diver Eventos"/>
+    <!-- fallback: <span class="nav-logo-txt">Diver <em>Eventos</em></span> -->
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#nosotros">Nosotros</a></li>
+    <li><a href="index.html#eventos">Eventos</a></li>
+    <li><a href="galeria.html">Galería</a></li>
+    <li><a href="index.html#contacto">Contacto</a></li>
+    <li><a href="cotizar.html" class="active nav-btn">Cotizar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero-cot">
+  <div class="hero-cot-tag">Diver Eventos · La Plata</div>
+  <h1>Cotizá tu <em>evento</em></h1>
+  <p>Completá el formulario y te respondemos por WhatsApp con toda la información que necesitás para organizar tu festejo.</p>
+</div>
+
+<!-- CONTENIDO -->
+<div class="main-wrap">
+
+  <!-- INFO IZQUIERDA -->
+  <div class="info-panel">
+    <div class="info-tag reveal-l">Cómo funciona</div>
+    <h2 class="reveal-l">Simple y rápido,<br/><em>sin vueltas</em></h2>
+    <p class="reveal-l">No hacen falta datos exactos para empezar. Con lo que tenés en mente alcanza para que te demos una primera idea de precios y disponibilidad.</p>
+
+    <div class="pasos reveal">
+      <div class="paso">
+        <div class="paso-num">01</div>
+        <div class="paso-txt">
+          <h4>Completás el formulario</h4>
+          <p>Nombre, tipo de evento, cantidad estimada de invitados y cualquier detalle que quieras comentar.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">02</div>
+        <div class="paso-txt">
+          <h4>Te llega el mensaje por WhatsApp</h4>
+          <p>Al confirmar, se abre WhatsApp con tu consulta ya redactada y lista para enviarnos.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">03</div>
+        <div class="paso-txt">
+          <h4>Nos ponemos en contacto</h4>
+          <p>Te respondemos a la brevedad con precios, disponibilidad y podemos coordinar una visita al salón.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-contacto reveal">
+      <p>Si preferís llamarnos directamente:<br/>
+        <a href="tel:02214637217">0221 463-7217</a> &nbsp;·&nbsp;
+        <a href="mailto:dragracielanoemiaguirre@gmail.com">dragracielanoemiaguirre@gmail.com</a>
+      </p>
+      <p style="margin-top:.6rem">Estamos en <strong>San Carlos, calle 38 y 138</strong>, La Plata.</p>
+    </div>
+  </div>
+
+  <!-- FORMULARIO -->
+  <div class="form-card reveal">
+    <div class="form-card-title">Contanos sobre tu evento</div>
+    <p class="form-card-sub">Los campos con <span style="color:var(--accent)">*</span> son obligatorios. El resto completalo con lo que tengas.</p>
+
+    <div id="form-cotizar">
+
+      <!-- Nombre -->
+      <div class="campo" id="campo-nombre">
+        <label for="nombre">Nombre y apellido <span>*</span></label>
+        <input type="text" id="nombre" placeholder="Ej: Laura García" autocomplete="name"/>
+        <div class="campo-error">Por favor ingresá tu nombre.</div>
+      </div>
+
+      <!-- Teléfono -->
+      <div class="campo" id="campo-tel">
+        <label for="tel">Teléfono de contacto <span>*</span></label>
+        <input type="tel" id="tel" placeholder="Ej: 221 555-0000" autocomplete="tel"/>
+        <div class="campo-error">Por favor ingresá un teléfono de contacto.</div>
+      </div>
+
+      <!-- Tipo de evento -->
+      <div class="campo" id="campo-tipo">
+        <label for="tipo">Tipo de evento <span>*</span></label>
+        <div class="select-wrap">
+          <select id="tipo">
+            <option value="" disabled selected>Seleccioná una opción</option>
+            <option value="Cumpleaños">Cumpleaños</option>
+            <option value="Quinceañera">Quinceañera</option>
+            <option value="Casamiento">Casamiento</option>
+            <option value="Fiesta infantil">Fiesta infantil</option>
+            <option value="Bautismo / Comunión">Bautismo / Comunión</option>
+            <option value="Aniversario">Aniversario</option>
+            <option value="Evento corporativo">Evento corporativo</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div class="campo-error">Por favor seleccioná el tipo de evento.</div>
+      </div>
+
+      <!-- Fecha tentativa -->
+      <div class="campo">
+        <label for="fecha">Fecha tentativa</label>
+        <input type="date" id="fecha"/>
+      </div>
+
+      <!-- Cantidad de invitados -->
+      <div class="campo">
+        <label for="invitados">Cantidad de invitados estimada</label>
+        <div class="invitados-wrap">
+          <input type="number" id="invitados" placeholder="Ej: 150" min="1" max="300"/>
+          <button class="no-se-btn" id="btn-nose" type="button">Todavía no sé</button>
+        </div>
+      </div>
+
+      <!-- Servicios de interés -->
+      <div class="campo">
+        <label>Servicios de interés</label>
+        <div class="checks-grid">
+          <label class="check-item" id="ci-dj">
+            <input type="checkbox" value="DJ"/> DJ
+          </label>
+          <label class="check-item" id="ci-bar">
+            <input type="checkbox" value="Bartender"/> Bartender
+          </label>
+          <label class="check-item" id="ci-coci">
+            <input type="checkbox" value="Servicio de cocina"/> Cocina
+          </label>
+          <label class="check-item" id="ci-mozo">
+            <input type="checkbox" value="Mozos"/> Mozos
+          </label>
+          <label class="check-item" id="ci-candy">
+            <input type="checkbox" value="Candy bar"/> Candy bar
+          </label>
+          <label class="check-item" id="ci-video">
+            <input type="checkbox" value="Video y proyección"/> Video
+          </label>
+          <label class="check-item" id="ci-parri">
+            <input type="checkbox" value="Parrilla"/> Parrilla
+          </label>
+          <label class="check-item" id="ci-trono">
+            <input type="checkbox" value="Sillón trono"/> Sillón trono
+          </label>
+        </div>
+      </div>
+
+      <!-- Mensaje -->
+      <div class="campo">
+        <label for="mensaje">Contanos más sobre tu festejo</label>
+        <textarea id="mensaje" placeholder="Ej: Es el cumpleaños de 15 de mi hija, queremos una decoración temática, estamos evaluando entre 100 y 120 personas..."></textarea>
+      </div>
+
+      <!-- Botón -->
+      <button class="btn-enviar" id="btn-enviar" type="button">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Enviar por WhatsApp
+      </button>
+      <p class="btn-nota">Se va a abrir WhatsApp con tu consulta ya redactada. Solo tenés que enviarlo.</p>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h2>¿Preferís hablar<br/><em>directamente?</em></h2>
+  <p>Coordinamos una visita al salón de un día para otro.</p>
+  <a href="tel:02214637217" class="btn-white">Llamar ahora · 0221 463-7217</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html">
+    <!-- LOGO PIE -->
+    <img src="logo.png" alt="Logo Diver Eventos" style="height:36px;width:auto;display:block;opacity:.85;filter:brightness(10)"/>
+    <!-- fallback: <div class="footer-logo">Diver <em>Eventos</em></div> -->
+  </a>
+  <p class="footer-copy">© 2025 Diver Eventos — La Plata, Buenos Aires</p>
+  <div class="footer-socials">
+    <a href="https://www.facebook.com/profile.php?id=61581986461908" target="_blank" class="f-soc" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+    </a>
+    <a href="tel:02214637217" class="f-soc" aria-label="Teléfono">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 3.18 2 2 0 012 1h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+    </a>
+    <a href="mailto:dragracielanoemiaguirre@gmail.com" class="f-soc" aria-label="Email">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+/* ── NAV ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+
+/* ── Reveal ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal,.reveal-l').forEach(el => obs.observe(el));
+
+/* ── Botón "Todavía no sé" ── */
+const btnNose     = document.getElementById('btn-nose');
+const inputInvit  = document.getElementById('invitados');
+let noSe = false;
+btnNose.addEventListener('click', () => {
+  noSe = !noSe;
+  btnNose.classList.toggle('activo', noSe);
+  inputInvit.disabled = noSe;
+  inputInvit.value = noSe ? '' : '';
+  inputInvit.placeholder = noSe ? 'A definir' : 'Ej: 150';
+});
+
+/* ── Checkboxes visuales ── */
+document.querySelectorAll('.check-item').forEach(label => {
+  const cb = label.querySelector('input[type="checkbox"]');
+  cb.addEventListener('change', () => label.classList.toggle('marcado', cb.checked));
+});
+
+/* ── Validación simple ── */
+function validar() {
+  let ok = true;
+  const campos = [
+    { id: 'campo-nombre', input: document.getElementById('nombre'),   check: v => v.trim().length > 1 },
+    { id: 'campo-tel',    input: document.getElementById('tel'),      check: v => v.trim().length > 5 },
+    { id: 'campo-tipo',   input: document.getElementById('tipo'),     check: v => v !== '' },
+  ];
+  campos.forEach(c => {
+    const val = c.input.value;
+    const campoEl = document.getElementById(c.id);
+    if (!c.check(val)) {
+      campoEl.classList.add('invalido');
+      ok = false;
+    } else {
+      campoEl.classList.remove('invalido');
+    }
+  });
+  return ok;
+}
+
+/* ── Armar y enviar mensaje a WhatsApp ── */
+document.getElementById('btn-enviar').addEventListener('click', () => {
+  if (!validar()) {
+    document.querySelector('.campo.invalido input, .campo.invalido select')?.scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+
+  const nombre   = document.getElementById('nombre').value.trim();
+  const tel      = document.getElementById('tel').value.trim();
+  const tipo     = document.getElementById('tipo').value;
+  const fecha    = document.getElementById('fecha').value;
+  const invit    = noSe ? 'Todavía no lo sé' : (inputInvit.value ? inputInvit.value + ' personas' : 'No especificado');
+  const mensaje  = document.getElementById('mensaje').value.trim();
+
+  const servicios = [];
+  document.querySelectorAll('.check-item input:checked').forEach(cb => servicios.push(cb.value));
+
+  // Formatear fecha
+  let fechaStr = 'No especificada';
+  if (fecha) {
+    const [y, m, d] = fecha.split('-');
+    const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    fechaStr = `${d} de ${meses[parseInt(m)-1]} de ${y}`;
+  }
+
+  let msg = `Hola! Les escribo desde el formulario de cotización del sitio web.\n\n`;
+  msg += `*Nombre:* ${nombre}\n`;
+  msg += `*Teléfono:* ${tel}\n`;
+  msg += `*Tipo de evento:* ${tipo}\n`;
+  msg += `*Fecha tentativa:* ${fechaStr}\n`;
+  msg += `*Cantidad de invitados:* ${invit}\n`;
+  if (servicios.length) {
+    msg += `*Servicios de interés:* ${servicios.join(', ')}\n`;
+  }
+  if (mensaje) {
+    msg += `\n*Mensaje adicional:*\n${mensaje}`;
+  }
+
+  const numero  = '5492214637217'; // +54 221 463-7217 sin el +
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/${numero}?text=${encoded}`, '_blank');
+});
+
+/* ── Limpiar error al escribir ── */
+['nombre','tel','tipo'].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('input', () => {
+    document.getElementById('campo-' + id)?.classList.remove('invalido');
+  });
+  el.addEventListener('change', () => {
+    document.getElementById('campo-' + id)?.classList.remove('invalido');
+  });
+});
+</script>
+</body>
+</html>
