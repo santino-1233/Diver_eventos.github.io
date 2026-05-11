@@ -40,16 +40,16 @@ nav{
 }
 nav.scrolled{
   height:60px;
-  background:rgba(250,247,243,0.97);
+  background:rgba(18,16,14,0.97);
   backdrop-filter:blur(20px);
-  box-shadow:0 1px 0 var(--border);
+  box-shadow:0 1px 0 rgba(255,255,255,.08);
 }
 .nav-logo img{height:38px;width:auto;display:block;filter:brightness(10);transition:filter .3s,opacity .2s}
-nav.scrolled .nav-logo img{filter:none}
+nav.scrolled .nav-logo img{filter:brightness(10)}
 .nav-logo img:hover{opacity:.85}
 .nav-logo-txt{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;letter-spacing:.01em}
 nav:not(.scrolled) .nav-logo-txt{color:var(--white)}
-nav.scrolled .nav-logo-txt{color:var(--ink)}
+nav.scrolled .nav-logo-txt{color:var(--white)}
 .nav-logo-txt em{font-style:normal;color:var(--accent)}
 .nav-links{display:flex;align-items:center;list-style:none;gap:.2rem}
 .nav-links a{
@@ -58,8 +58,8 @@ nav.scrolled .nav-logo-txt{color:var(--ink)}
 }
 nav:not(.scrolled) .nav-links a{color:rgba(255,255,255,.7)}
 nav:not(.scrolled) .nav-links a:hover{color:var(--white);background:rgba(255,255,255,.1)}
-nav.scrolled .nav-links a{color:var(--mid)}
-nav.scrolled .nav-links a:hover{color:var(--ink);background:var(--sky)}
+nav.scrolled .nav-links a{color:rgba(255,255,255,.7)}
+nav.scrolled .nav-links a:hover{color:var(--white);background:rgba(255,255,255,.1)}
 .nav-btn{
   font-size:.7rem!important;font-weight:600!important;letter-spacing:.14em!important;text-transform:uppercase;
   color:var(--white)!important;background:var(--accent)!important;
@@ -74,7 +74,7 @@ nav:not(.scrolled) .nav-btn{box-shadow:0 2px 14px rgba(0,0,0,.3)}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
 .hamburger span{display:block;width:22px;height:2px;border-radius:2px;transition:all .3s,background .3s}
 nav:not(.scrolled) .hamburger span{background:var(--white)}
-nav.scrolled .hamburger span{background:var(--ink)}
+nav.scrolled .hamburger span{background:var(--white)}
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
@@ -114,9 +114,9 @@ nav.scrolled .hamburger span{background:var(--ink)}
   position:absolute;inset:0;z-index:1;
   background:
     linear-gradient(to top,
-      rgba(18,16,14,.92) 0%,
-      rgba(18,16,14,.45) 45%,
-      rgba(18,16,14,.2) 100%);
+      rgba(18,16,14,.98) 0%,
+      rgba(18,16,14,.75) 45%,
+      rgba(18,16,14,.55) 100%);
   pointer-events:none;
 }
 .hero-content{
@@ -250,13 +250,6 @@ nav.scrolled .hamburger span{background:var(--ink)}
 }
 .galeria-banner-bg{
   position:absolute;inset:0;z-index:0;
-  background:
-    linear-gradient(to right,
-      rgba(18,16,14,.82) 0%,
-      rgba(18,16,14,.55) 50%,
-      rgba(18,16,14,.82) 100%),
-    url('galeria-preview.jpg') center/cover no-repeat;
-  background-color:#1e1c19;
   transition:transform .6s ease;
 }
 .galeria-banner:hover .galeria-banner-bg{transform:scale(1.03)}
@@ -488,9 +481,9 @@ footer{
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#inicio" class="nav-logo">
-    <img src="logo.png" alt="Logo Diver Eventos" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
-    <span class="nav-logo-txt" style="display:none">Diver <em>Eventos</em></span>
+  <a href="#inicio" style="display:flex;align-items:center;gap:8px;">
+    <img src="logo_b.png" alt="Logo Diver Eventos" style="height:32px;width:auto;opacity:.7;filter:brightness(10)" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <div class="footer-logo" >Diver <em>Eventos</em></div>
   </a>
   <ul class="nav-links">
     <li><a href="#nosotros">Nosotros</a></li>
@@ -515,7 +508,7 @@ footer{
 
 <!-- ════ HERO ════ -->
 <section class="hero" id="inicio">
-  <div class="hero-bg"><img src="banner.jpeg" alt="Banner del Salón Diver Eventos" class="hero-bg-img"/></div>
+  <div class="hero-bg"><img src="Principal1.png" alt="Banner del Salón Diver Eventos" class="hero-bg-img"/></div>
 
   <div class="hero-content">
     <div class="hero-eyebrow">Salón de fiestas · La Plata</div>
@@ -587,28 +580,15 @@ footer{
 <section id="nosotros" class="nosotros">
   <div class="nosotros-inner">
 
-    <!-- Foto izquierda -->
     <div class="reveal-l">
       <div class="nos-img-wrap">
-        <!--
-          REEMPLAZÁ el div.nos-foto por:
-          <div class="nos-foto" style="background:none;opacity:1">
-            <img src="salon-interior.jpg" alt="Interior Diver Eventos" style="width:100%;height:100%;object-fit:cover"/>
-          </div>
-        -->
-        <div class="nos-foto">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-            <rect x="3" y="3" width="18" height="18" rx="1"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <polyline points="21 15 16 10 5 21"/>
-          </svg>
-          Foto interior del salón
+        <div class="nos-foto" style="background:none;opacity:1;padding:0;">
+          <img src="Salon4.jpeg" alt="Interior Diver Eventos" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"/>
         </div>
         <div class="nos-deco-line"></div>
       </div>
     </div>
 
-    <!-- Texto derecha -->
     <div class="reveal-r">
       <div class="sec-tag">Quiénes somos</div>
       <h2>Un espacio creado<br/><em>para celebrar la vida</em></h2>
@@ -661,20 +641,24 @@ footer{
 
     <div class="eventos-cta reveal">
       <p class="eventos-cta-txt">¿Ya tenés una fecha en mente?</p>
-      <a href="cotizar.html" class="btn-ev-cta">Cotizá tu evento</a>
+      <a href="cotizar.html" class="btn-ev-cta" style="font-size:.88rem;padding:1.2rem 3.2rem;background:linear-gradient(135deg,#1c5fa8,#2d7dd2);box-shadow:0 8px 36px rgba(28,95,168,.65);border-radius:4px;letter-spacing:.18em;">✦ &nbsp;Cotizá tu evento&nbsp; ✦</a>
     </div>
   </div>
 </section>
 
 <!-- ════ GALERÍA BANNER ════ -->
 <section class="galeria-banner reveal" id="galeria">
-  <div class="galeria-banner-bg"></div>
+  <div class="galeria-banner-bg">
+    <img src="banner.jpeg" alt="Galería Diver Eventos" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.6);z-index:1;"></div>
+  </div>
   <div class="galeria-banner-content">
     <div class="sec-tag" style="justify-content:center;color:var(--skydeep)">
       <span style="display:block;width:24px;height:1px;background:var(--skydeep)"></span>
       Galería de fotos
       <span style="display:block;width:24px;height:1px;background:var(--skydeep)"></span>
     </div>
+    <style>.galeria-banner-content .sec-tag::before{display:none}</style>
     <h2 class="galeria-h2">Conocé el<br/><em>espacio de cerca</em></h2>
     <p class="galeria-sub">Recorrés el salón, el parque y los ambientes antes de tu visita. Más de 10 años de eventos plasmados en imágenes.</p>
     <a href="galeria.html" class="btn-galeria">Ver todas las fotos</a>
@@ -718,17 +702,29 @@ footer{
         </div>
         <div><span class="c-label">WhatsApp</span><span class="c-val">Escribinos ahora</span></div>
       </a>
-      <a href="mailto:dragracielanoemiaguirre@gmail.com" class="c-link">
-        <div class="c-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div><span class="c-label">Email</span><span class="c-val">dragracielanoemiaguirre@gmail.com</span></div>
-      </a>
+
       <a href="https://www.facebook.com/profile.php?id=61581986461908" target="_blank" class="c-link">
         <div class="c-icon" style="background:rgba(24,119,242,.1)">
           <svg viewBox="0 0 24 24" style="fill:#1877f2;stroke:none;width:16px;height:16px"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
         </div>
         <div><span class="c-label">Facebook</span><span class="c-val">Diver Eventos</span></div>
+      </a>
+      <a href="https://www.instagram.com/diver_evento/" target="_blank" class="c-link">
+        <div class="c-icon" style="background:rgba(225,48,108,.1)">
+          <svg viewBox="0 0 24 24" style="stroke:none;fill:url(#ig-grad);width:16px;height:16px">
+            <defs>
+              <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#f09433"/>
+                <stop offset="25%" stop-color="#e6683c"/>
+                <stop offset="50%" stop-color="#dc2743"/>
+                <stop offset="75%" stop-color="#cc2366"/>
+                <stop offset="100%" stop-color="#bc1888"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </div>
+        <div><span class="c-label">Instagram</span><span class="c-val">@diver_evento</span></div>
       </a>
       <a href="https://www.google.com/maps/place/DIVER+EVENTOS/@-34.9351489,-57.9942745,17z" target="_blank" class="c-link">
         <div class="c-icon">
@@ -760,12 +756,13 @@ footer{
     <a href="https://www.facebook.com/profile.php?id=61581986461908" target="_blank" class="f-soc" aria-label="Facebook">
       <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
     </a>
+    <a href="https://www.instagram.com/diver_evento/" target="_blank" class="f-soc" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
     <a href="tel:02214637217" class="f-soc" aria-label="Teléfono">
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 3.18 2 2 0 012 1h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
     </a>
-    <a href="mailto:dragracielanoemiaguirre@gmail.com" class="f-soc" aria-label="Email">
-      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-    </a>
+
   </div>
 </footer>
 
