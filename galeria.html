@@ -50,12 +50,8 @@ nav.scrolled{height:54px;box-shadow:0 4px 24px rgba(18,16,14,.07)}
 .nav-logo{display:flex;align-items:center}
 .nav-logo img{height:40px;width:auto;display:block;transition:opacity .2s}
 .nav-logo img:hover{opacity:.85}
-.nav-logo-txt{
-  font-family:'Playfair Display',serif;
-  font-size:1.2rem;font-weight:700;
-  color:var(--ink);letter-spacing:.01em;
-}
-.nav-logo-txt em{font-style:normal;color:var(--accent)}
+.nav-logo-txt{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:var(--ink)}
+.nav-logo-txt em{font-style:italic;color:var(--accent)}
 .nav-links{display:flex;align-items:center;list-style:none;gap:.2rem}
 .nav-links a{
   font-size:.72rem;font-weight:500;
@@ -129,7 +125,7 @@ nav.scrolled{height:54px;box-shadow:0 4px 24px rgba(18,16,14,.07)}
   padding:2.5rem 2rem;
   background:var(--white);
   border-bottom:1px solid var(--border);
-  position:sticky;top:64px;z-index:100;
+  position:static;
 }
 .filtro-btn{
   font-family:'DM Sans',sans-serif;
@@ -302,22 +298,22 @@ nav.scrolled{height:54px;box-shadow:0 4px 24px rgba(18,16,14,.07)}
 /* ════ FOOTER ════ */
 footer{
   background:var(--ink);
-  border-top:1px solid rgba(255,255,255,.07);
-  padding:2.5rem 5rem;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:2.8rem 5rem;
+  display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:1.5rem;
 }
-.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--white)}
-.footer-logo em{font-style:normal;color:var(--skydeep)}
-.footer-copy{font-size:.72rem;color:rgba(255,255,255,.25);letter-spacing:.05em}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:var(--white)}
+.footer-logo em{font-style:italic;color:var(--skydeep)}
+.footer-copy{font-size:.7rem;color:rgba(255,255,255,.2);letter-spacing:.06em}
 .footer-socials{display:flex;gap:.5rem}
 .f-soc{
-  width:34px;height:34px;border-radius:2px;
-  border:1px solid rgba(255,255,255,.12);
+  width:36px;height:36px;border-radius:2px;border:1px solid rgba(255,255,255,.1);
   display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,.4);transition:border-color .2s,color .2s;
+  color:rgba(255,255,255,.35);transition:border-color .2s,color .2s;
 }
 .f-soc:hover{border-color:var(--accent2);color:var(--white)}
-.f-soc svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.f-soc svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 /* ════ REVEAL ════ */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
@@ -332,7 +328,7 @@ footer{
   .back-link{left:1.5rem}
   .grid-masonry{columns:2}
   .galeria-wrap{padding:3rem 1.5rem 5rem}
-  footer{padding:2rem;flex-direction:column;align-items:flex-start;gap:1.2rem}
+  footer{padding:2.2rem 1.5rem;flex-direction:column;align-items:flex-start;gap:1rem}
 }
 @media(max-width:540px){
   .grid-masonry{columns:1}
@@ -344,10 +340,9 @@ footer{
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="index.html" class="nav-logo">
-    <!-- LOGO: reemplazá src con tu archivo -->
-    <img src="logo.png" alt="Logo Diver Eventos"/>
-    <!-- fallback texto: <span class="nav-logo-txt">Diver <em>Eventos</em></span> -->
+  <a href="index.html" style="display:flex;align-items:center;gap:8px;">
+    <img src="logo_n.png" alt="Logo Diver Eventos" style="height:32px;width:auto;opacity:.9;filter:none" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <div class="footer-logo" style="color:var(--ink)">Diver <em style="color:var(--accent)">Eventos</em></div>
   </a>
   <ul class="nav-links">
     <li><a href="index.html#nosotros">Nosotros</a></li>
@@ -374,43 +369,11 @@ footer{
   <button class="filtro-btn activo" data-filtro="todo">Todo</button>
   <button class="filtro-btn" data-filtro="foto">Fotos</button>
   <button class="filtro-btn" data-filtro="video">Videos</button>
+</div>
 
 <!-- GRID -->
 <div class="galeria-wrap">
   <div class="grid-masonry" id="grid">
-
-    <!--
-    ══════════════════════════════════════════
-    CÓMO AGREGAR CONTENIDO:
-
-    — FOTO:
-    <div class="grid-item" data-tipo="foto cumple">
-      <img src="TU_FOTO.jpg" alt="Descripción"/>
-      <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
-    </div>
-
-    — VIDEO (archivo local .mp4):
-    <div class="grid-item video-item" data-tipo="video quince">
-      <video src="TU_VIDEO.mp4" preload="metadata" muted playsinline></video>
-      <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-      <div class="item-overlay"><span class="item-caption">Quinceañera de Sofía</span></div>
-    </div>
-
-    — VIDEO YOUTUBE/VIMEO (embed):
-    <div class="grid-item video-item" data-tipo="video casamiento">
-      <div class="yt-wrap" data-src="https://www.youtube.com/embed/ID_DEL_VIDEO">
-        <img src="https://img.youtube.com/vi/ID_DEL_VIDEO/hqdefault.jpg" alt="Preview"/>
-        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-      </div>
-      <div class="item-overlay"><span class="item-caption">Casamiento de Laura y Martín</span></div>
-    </div>
-
-    data-tipo puede combinar valores: "foto cumple", "video quince", "foto salon", etc.
-    Usá los filtros disponibles: foto · video · cumple · quince · casamiento · infantil · salon
-    ══════════════════════════════════════════
-    -->
-
-    <!-- ── EJEMPLOS PLACEHOLDER (borrá estos cuando tengas contenido real) ── -->
 
     <div class="grid-item" data-tipo="foto salon">
     <div class="grid-item" data-tipo="foto cumple">
@@ -429,7 +392,7 @@ footer{
       <span class="item-tag">Video</span>
     </div>
 
-        <div class="grid-item video-item" data-tipo="video quince">
+    <div class="grid-item video-item" data-tipo="video quince">
     <div class="grid-item video-item" data-tipo="video quince">
       <video src="Videoentrada2.mp4" preload="metadata" muted playsinline></video>
       <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
@@ -458,7 +421,7 @@ footer{
     <div class="grid-item" data-tipo="foto cumple">
       <img src="Salon4.jpeg" alt="Descripción"/>
       <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
-    </div>>
+    </div>
       <span class="item-tag">Salón</span>
     </div>
 
@@ -494,8 +457,8 @@ footer{
     </div>
       <span class="item-tag">Cumpleaños</span>
     </div>
-    
-        <div class="grid-item" data-tipo="foto cumple">
+
+    <div class="grid-item" data-tipo="foto cumple">
     <div class="grid-item" data-tipo="foto cumple">
       <img src="Salon8.jpeg" alt="Descripción"/>
       <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
@@ -519,41 +482,41 @@ footer{
     </div>
       <span class="item-tag">Cumpleaños</span>
     </div>
-    
-        <div class="grid-item" data-tipo="foto cumple">
+
+    <div class="grid-item" data-tipo="foto cumple">
     <div class="grid-item" data-tipo="foto cumple">
       <img src="Salon10.jpeg" alt="Descripción"/>
       <div class="item-overlay"><span class="item-caption">Cumpleaños de María</span></div>
     </div>
       <span class="item-tag">Cumpleaños</span>
     </div>
+
   </div>
 </div>
 
 <!-- CTA FINAL -->
 <div class="cta-final">
-  <h2>¿Te gustó lo que<br/><em>viste?</em></h2>
-  <p>Reservá tu fecha y hacé que tu evento sea el próximo en estas páginas.</p>
-  <a href="https://wa.me/5402214637217?text=Hola%2C%20vi%20la%20galer%C3%ADa%20y%20me%20gustar%C3%ADa%20consultar" target="_blank" class="btn-white">Consultá por WhatsApp</a>
+  <h2>¿Querés saber cuánto<br/><em>cuesta tu evento?</em></h2>
+  <p>Completá el formulario y te enviamos una cotización a medida, sin compromiso.</p>
+  <a href="cotizar.html" class="btn-white">Pedí tu cotización</a>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <!-- LOGO PIE: reemplazá src con tu archivo -->
-  <a href="index.html" class="footer-logo-wrap">
-    <img src="logo.png" alt="Logo Diver Eventos" style="height:36px;width:auto;display:block;opacity:.85;filter:brightness(10)"/>
-    <!-- fallback: <div class="footer-logo">Diver <em>Eventos</em></div> -->
+  <a href="index.html" style="display:flex;align-items:center;gap:8px;">
+    <img src="logo_b.png" alt="Logo Diver Eventos" style="height:32px;width:auto;opacity:.7;filter:brightness(10)" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+    <div class="footer-logo">Diver <em>Eventos</em></div>
   </a>
   <p class="footer-copy">© 2025 Diver Eventos — La Plata, Buenos Aires</p>
   <div class="footer-socials">
     <a href="https://www.facebook.com/profile.php?id=61581986461908" target="_blank" class="f-soc" aria-label="Facebook">
       <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
     </a>
+    <a href="https://www.instagram.com/diver_evento/" target="_blank" class="f-soc" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
     <a href="tel:02214637217" class="f-soc" aria-label="Teléfono">
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 3.18 2 2 0 012 1h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
-    </a>
-    <a href="mailto:dragracielanoemiaguirre@gmail.com" class="f-soc" aria-label="Email">
-      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
     </a>
   </div>
 </footer>
@@ -600,7 +563,6 @@ const lbClose   = document.getElementById('lb-close');
 const lbPrev    = document.getElementById('lb-prev');
 const lbNext    = document.getElementById('lb-next');
 
-// Recolectar items abribles (con imagen real o video real, no placeholders)
 let openable = [];
 let currentIdx = 0;
 
@@ -671,23 +633,20 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % openable.length; renderLB(); }
 });
 
-// Asignar click a cada item
 items.forEach((item, i) => {
   item.addEventListener('click', () => {
     buildOpenable();
-    // Encontrar el índice dentro de openable que corresponde a este item
     const img = item.querySelector('img:not(.item-ph)');
     const vid = item.querySelector('video');
     const ytWrap = item.querySelector('.yt-wrap');
-    const caption = item.querySelector('.item-caption')?.textContent || '';
     let src = img?.src || vid?.src || ytWrap?.dataset.src;
-    if (!src) return; // placeholder, no abrir
+    if (!src) return;
     const idx = openable.findIndex(o => o.src === src);
     openLB(idx >= 0 ? idx : 0);
   });
 });
 
-/* ── Videos YouTube: click en thumbnail carga iframe ── */
+/* ── Videos YouTube ── */
 document.querySelectorAll('.yt-wrap').forEach(wrap => {
   wrap.addEventListener('click', e => {
     e.stopPropagation();
